@@ -3,6 +3,8 @@
 //                installer sets env vars itself 
 // to run prog  : go run filename.go
 
+// With the Go programming language, we can't define variables that we won't use
+
 package main        // main package
 
                    /* import libs */
@@ -12,6 +14,7 @@ import (
 	"math/rand"                                             // package within package
 	"bufio"
 	"os"
+	"strings"
 )
 
 var a,b int = 32,56                                         // dynamic not allowed outside func, so statically typed
@@ -46,6 +49,10 @@ func main() {
 	naam, _ := reader.ReadString('\n')                // desired string read until delim '\n' occur
 	                                                  // else return error in _ 
 
+	arr := strings.Split(naam," ")                    // split values with delimiter as " " and store in array
+
 	fmt.Println(sv1,sv2,st)
 	fmt.Print(naam)
+
+	fmt.Println(arr[4])
 }
