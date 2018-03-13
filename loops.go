@@ -43,4 +43,13 @@ func main() {
 		i+=1
 	}
 
+	var temp[] int                               // empty slice
+	var v int
+	for i:=0;i<4;i++ {
+		fmt.Scanf("%d",&v)
+		temp = append(temp,v)
+	}
+	for i:= range temp {                      // iterate slice using "range" keyword, which gives index
+		fmt.Print(temp[i]," ")
+	}
 }
