@@ -16,7 +16,9 @@ func testarrpass(passedarr [] int){           // array as an arg
 
 func main() {
 
-	var i,j int
+	var i,j,s int
+
+	s = 0
 
 	// var arrval[5] int                       // 1-D array declaration, only const size is valid
 
@@ -29,16 +31,21 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)      
 	vals,_ := reader.ReadString('\n')       // space separated values as input
 
-	sep_newline_char := strings.Split(vals,"\n")                // values splitted at delim "\n"
+	sep_newline_char := strings.Split(vals,"\r")                // values splitted at delim "\r", imp for last arg
 	vals_without_newlinechar := sep_newline_char[0]
 	arr := strings.Split(vals_without_newlinechar," ")          // values splitted at delim " "
 
-	val1,_ := strconv.ParseInt(arr[0],10,64)
-	val2,_ := strconv.ParseInt(arr[1],10,64)                   // Parse to Int64    (val, base10, Int64)
-	fmt.Println(val1,val2)
+	l := len(arr)
+	for i=0;i<l;i++ {
+		convval,err := strconv.Atoi(arr[i])                   // Parse to Int64    (valstr, base10, Int64)
+		if err != nil{
+			fmt.Println(err)
+		}
+		s+=convval
+	}              
+	fmt.Println(s)
 
-
-                                               /* 2D array */
+                                                 /* 2D array */
 	var matval = [2][2] int {{1,2} , {55,6}}
 	fmt.Println(matval[1][0])
 
@@ -49,9 +56,10 @@ func main() {
 	for i=0;i<2;i++ {
 		row,_ := reader.ReadString('\n')
 
-		temp := strings.Split(row,"\n")
+		temp := strings.Split(row,"\r")
 		rowf := temp[0]
 		rowarr := strings.Split(rowf," ")
+
 		for j=0;j<3;j++ {
 			mat[i][j] = rowarr[j]              // definition
 		}
