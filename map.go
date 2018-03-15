@@ -10,7 +10,7 @@ import(
 func main() {
 
 	var mp map[string]string            /* declare a variable, by default map will be nil */
-	mp = make(map[string]string)        /* define the map as nil map can not be assigned any value*/
+	mp = make(map[string]string)        /* define the map, as nil map can not be assigned any value*/
 
 	mp["india"] = "delhi"
 	mp["punjab"] = "CHD"
