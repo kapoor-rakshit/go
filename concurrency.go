@@ -15,18 +15,16 @@ import (
 var wg sync.WaitGroup                      // define the WaitGroup variable
 
 func say(s string) {
-	for i:=0; i < 3; i++ {
+	
 		time.Sleep(100*time.Millisecond)
 		fmt.Println(s)
-	}	
 }
 
 func wgsay(s string) {
-	for i:=0; i < 3; i++ {
+
+		defer wg.Done()
 		time.Sleep(100*time.Millisecond)
 		fmt.Println(s)
-	}
-	wg.Done()
 }
 
 func main() {
@@ -58,9 +56,15 @@ func main() {
 // there are also going to be times when we want to run a group of goroutines, wait for them to all finish, then run another group. 
 // Again, we need some way, other than an arbitrary sleep, to make this happen. To do it, we'll use the sync package from the standard library.	
 
+// Add() : identify how many goroutines need to be waited.
+// Done(): When a goroutine exits, it must call Done.
+// Wait(): 'main' goroutine blocks on Wait, Once the counter becomes 0, the Wait will return, and main goroutine can continue to run.
+
 	wg.Add(1)                // add goroutines to this group
 	go wgsay("Hey")
 	wg.Add(1)
 	go wgsay("there")
 	wg.Wait()                // wait for this group of goroutines with wg.Wait()
+
+	fmt.Println("This is main goroutine")
 } 
